@@ -16,8 +16,8 @@ const productos = [
     },
     {
         id: 3,
-        nombre: "God of War: Ragnarök",
-        precio: 69.99,
+        nombre: "dead by daylight",
+        precio: 53.98,
         imagen: "https://placehold.co/300x180/1e1e1e/ff5555?text=GoW",
         descripcion: "Kratos y Atreus se enfrentan al destino en el fin del mundo nórdico."
     },
