@@ -16,10 +16,10 @@ const productos = [
     },
     {
         id: 3,
-        nombre: "Dead by Daylight",
-        precio: 53.98,
-        imagen: "https://placehold.co/300x180/1e1e1e/ff5555?text=DbD",
-        descripcion: "Un juego de terror multijugador asimétrico: ¿serás sobreviviente o asesino?"
+        nombre: "God of War: Ragnarök",
+        precio: 69.99,
+        imagen: "https://placehold.co/300x180/1e1e1e/ff5555?text=GoW",
+        descripcion: "Kratos y Atreus se enfrentan al destino en el fin del mundo nórdico."
     },
     {
         id: 4,
@@ -30,47 +30,48 @@ const productos = [
     },
     {
         id: 5,
-        nombre: "God of War Ragnarök",
-        precio: 64.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/ff0000?text=GoW",
-        descripcion: "Kratos y Atreus se enfrentan a dioses y bestias en el fin del mundo nórdico."
+        nombre: "Resident Evil 4 Remake",
+        precio: 59.99,
+        imagen: "https://placehold.co/300x180/1e1e1e/ff0000?text=RE4",
+        descripcion: "Revive el clásico de survival horror con gráficos y jugabilidad mejorados."
     },
     {
         id: 6,
-        nombre: "Minecraft",
-        precio: 29.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/00ccff?text=Minecraft",
-        descripcion: "Explora, construye y sobrevive en un mundo de bloques infinito."
+        nombre: "Final Fantasy XVI",
+        precio: 69.99,
+        imagen: "https://placehold.co/300x180/1e1e1e/00aaff?text=FFXVI",
+        descripcion: "Un épico RPG lleno de batallas, invocaciones y un mundo de fantasía oscura."
     },
     {
         id: 7,
-        nombre: "Grand Theft Auto V",
+        nombre: "Cyberpunk 2077: Phantom Liberty",
         precio: 39.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/ffff00?text=GTA+V",
-        descripcion: "Explora Los Santos en un sandbox lleno de acción y posibilidades."
+        imagen: "https://placehold.co/300x180/1e1e1e/ffaa00?text=Cyberpunk",
+        descripcion: "Expansión de Cyberpunk 2077 con nueva historia, personajes y zona jugable."
     },
     {
         id: 8,
-        nombre: "Resident Evil 4 Remake",
-        precio: 59.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/008000?text=RE4",
-        descripcion: "Revive la icónica historia de Leon S. Kennedy en un remake lleno de terror y acción."
+        nombre: "Spider-Man 2",
+        precio: 69.99,
+        imagen: "https://placehold.co/300x180/1e1e1e/ff6600?text=Spiderman+2",
+        descripcion: "Peter Parker y Miles Morales unen fuerzas en una épica aventura en Nueva York."
     },
     {
         id: 9,
-        nombre: "Fortnite",
-        precio: 0.00,
-        imagen: "https://placehold.co/300x180/1e1e1e/ff69b4?text=Fortnite",
-        descripcion: "Battle Royale gratuito con eventos espectaculares y construcción estratégica."
+        nombre: "Assassin's Creed Mirage",
+        precio: 49.99,
+        imagen: "https://placehold.co/300x180/1e1e1e/ffffff?text=AC+Mirage",
+        descripcion: "Un regreso a las raíces de Assassin's Creed en Bagdad del siglo IX."
     },
     {
         id: 10,
-        nombre: "Cyberpunk 2077",
-        precio: 49.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/00ffff?text=Cyberpunk",
-        descripcion: "Sumérgete en Night City, una metrópolis futurista llena de peligros y tecnología."
+        nombre: "Street Fighter 6",
+        precio: 59.99,
+        imagen: "https://placehold.co/300x180/1e1e1e/00ffcc?text=SF6",
+        descripcion: "El clásico juego de lucha regresa con gráficos modernos y nuevos modos."
     }
 ];
+
 
 
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
