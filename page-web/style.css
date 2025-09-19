@@ -1,302 +1,268 @@
-// --- DATOS ---
-const productos = [
-    {
-        id: 1,
-        nombre: "The Legend of Zelda: Tears of the Kingdom",
-        precio: 69.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/00ff9d?text=Zelda",
-        descripcion: "Únete a Link en una nueva aventura por las tierras de Hyrule y más allá."
-    },
-    {
-        id: 2,
-        nombre: "Elden Ring",
-        precio: 59.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/ffcc00?text=Elden+Ring",
-        descripcion: "Un RPG de mundo abierto creado por FromSoftware y George R.R. Martin."
-    },
-    {
-        id: 3,
-        nombre: "God of War: Ragnarök",
-        precio: 69.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/ff5555?text=GoW",
-        descripcion: "Kratos y Atreus se enfrentan al destino en el fin del mundo nórdico."
-    },
-    {
-        id: 4,
-        nombre: "Hogwarts Legacy",
-        precio: 59.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/8a2be2?text=Hogwarts",
-        descripcion: "Vive tu propia aventura en el mundo mágico de Harry Potter."
-    },
-    {
-        id: 5,
-        nombre: "Resident Evil 4 Remake",
-        precio: 59.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/ff0000?text=RE4",
-        descripcion: "Revive el clásico de survival horror con gráficos y jugabilidad mejorados."
-    },
-    {
-        id: 6,
-        nombre: "Final Fantasy XVI",
-        precio: 69.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/00aaff?text=FFXVI",
-        descripcion: "Un épico RPG lleno de batallas, invocaciones y un mundo de fantasía oscura."
-    },
-    {
-        id: 7,
-        nombre: "Cyberpunk 2077: Phantom Liberty",
-        precio: 39.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/ffaa00?text=Cyberpunk",
-        descripcion: "Expansión de Cyberpunk 2077 con nueva historia, personajes y zona jugable."
-    },
-    {
-        id: 8,
-        nombre: "Spider-Man 2",
-        precio: 69.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/ff6600?text=Spiderman+2",
-        descripcion: "Peter Parker y Miles Morales unen fuerzas en una épica aventura en Nueva York."
-    },
-    {
-        id: 9,
-        nombre: "Assassin's Creed Mirage",
-        precio: 49.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/ffffff?text=AC+Mirage",
-        descripcion: "Un regreso a las raíces de Assassin's Creed en Bagdad del siglo IX."
-    },
-    {
-        id: 10,
-        nombre: "Street Fighter 6",
-        precio: 59.99,
-        imagen: "https://placehold.co/300x180/1e1e1e/00ffcc?text=SF6",
-        descripcion: "El clásico juego de lucha regresa con gráficos modernos y nuevos modos."
-    }
-];
-
-
-
-let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-// --- UTILIDADES ---
-function guardarCarrito() {
-    localStorage.setItem('carrito', JSON.stringify(carrito));
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-function actualizarContadorCarrito() {
-    const contador = document.getElementById('contador-carrito');
-    if (contador) {
-        const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
-        contador.textContent = totalItems;
-    }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9; /* Fondo claro */
+  color: #333;
+  line-height: 1.6;
 }
 
-function calcularTotal() {
-    return carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0).toFixed(2);
+/* --- HEADER --- */
+header {
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-// --- RENDERIZADO ---
-function renderizarHeader() {
-    return `
-        <header>
-            <h1>🎮 GameStore</h1>
-            <nav>
-                <a href="#inicio">Inicio</a>
-                <a href="#carrito">🛒 Carrito (<span id="contador-carrito">0</span>)</a>
-            </nav>
-        </header>
-    `;
+header h1 {
+  color: #007bff;
 }
 
-function renderizarFooter() {
-    return `
-        <footer>
-            <p>&copy; 2025 GameStore - Todos los derechos reservados</p>
-        </footer>
-    `;
+nav a {
+  color: #555;
+  text-decoration: none;
+  margin-left: 1.5rem;
+  font-weight: 500;
+  transition: color 0.3s;
 }
 
-function renderizarInicio() {
-    return `
-        <main>
-            <section class="buscador">
-                <input type="text" id="buscador" placeholder="Buscar juego...">
-                <button onclick="buscarJuegos()">🔍 Buscar</button>
-            </section>
-            <section id="catalogo" class="catalogo">
-                ${productos.map(p => `
-                    <div class="tarjeta">
-                        <img src="${p.imagen}" alt="${p.nombre}">
-                        <h3>${p.nombre}</h3>
-                        <p class="precio">$${p.precio.toFixed(2)}</p>
-                        <button onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
-                        <button onclick="navegar('detalle/${p.id}')">Ver detalle</button>
-                    </div>
-                `).join('')}
-            </section>
-        </main>
-    `;
+nav a:hover {
+  color: #007bff;
 }
 
-function renderizarDetalle(id) {
-    const producto = productos.find(p => p.id === id);
-    if (!producto) {
-        return `<main><p style="text-align:center; padding:3rem;">Producto no encontrado.</p></main>`;
-    }
-    return `
-        <main>
-            <section class="detalle-producto">
-                <img src="${producto.imagen}" alt="${producto.nombre}">
-                <h2>${producto.nombre}</h2>
-                <p class="precio">$${producto.precio.toFixed(2)}</p>
-                <p>${producto.descripcion}</p>
-                <button onclick="agregarAlCarrito(${producto.id})">Agregar al carrito</button>
-                <button onclick="navegar('inicio')" style="margin-left:1rem;">← Volver</button>
-            </section>
-        </main>
-    `;
+/* --- BUSCADOR --- */
+.buscador {
+  padding: 2rem;
+  text-align: center;
 }
 
-function renderizarCarrito() {
-    return `
-        <main>
-            <section class="lista-carrito">
-                ${carrito.length === 0 
-                    ? '<p style="text-align:center">El carrito está vacío.</p>' 
-                    : carrito.map(item => `
-                        <div class="item-carrito">
-                            <div>
-                                <h4>${item.nombre}</h4>
-                                <p>$${item.precio.toFixed(2)} x ${item.cantidad}</p>
-                            </div>
-                            <button onclick="eliminarDelCarrito(${item.id})">🗑️ Eliminar</button>
-                        </div>
-                    `).join('')
-                }
-            </section>
-            <div class="total">
-                <h3>Total: $<span id="total-carrito">${calcularTotal()}</span></h3>
-                <button onclick="vaciarCarrito()">Vaciar Carrito</button>
-                <button onclick="finalizarCompra()">Finalizar Compra</button>
-            </div>
-        </main>
-    `;
+.buscador input {
+  padding: 0.7rem;
+  width: 320px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 0.5rem;
 }
 
-function renderizarPagina(ruta) {
-    let contenido = '';
-    
-    if (ruta === 'inicio' || ruta === '') {
-        contenido = renderizarInicio();
-    } else if (ruta.startsWith('detalle/')) {
-        const id = parseInt(ruta.split('/')[1]);
-        contenido = renderizarDetalle(id);
-    } else if (ruta === 'carrito') {
-        contenido = renderizarCarrito();
-    } else {
-        contenido = `<main><p style="text-align:center; padding:3rem;">Página no encontrada.</p></main>`;
-    }
-
-    document.getElementById('app').innerHTML = `
-        ${renderizarHeader()}
-        ${contenido}
-        ${renderizarFooter()}
-    `;
-
-    // Actualizar contador después de renderizar
-    actualizarContadorCarrito();
-
-    // Si es carrito, actualizar total
-    if (ruta === 'carrito') {
-        document.getElementById('total-carrito').textContent = calcularTotal();
-    }
+.buscador button {
+  padding: 0.7rem 1.2rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
 }
 
-// --- FUNCIONES DEL CARRITO ---
-function agregarAlCarrito(id) {
-    const producto = productos.find(p => p.id === id);
-    if (!producto) return;
-
-    const itemExistente = carrito.find(item => item.id === id);
-    if (itemExistente) {
-        itemExistente.cantidad++;
-    } else {
-        carrito.push({ ...producto, cantidad: 1 });
-    }
-
-    guardarCarrito();
-    actualizarContadorCarrito();
-    alert(`${producto.nombre} agregado al carrito.`);
+.buscador button:hover {
+  background-color: #0056b3;
 }
 
-function eliminarDelCarrito(id) {
-    carrito = carrito.filter(item => item.id !== id);
-    guardarCarrito();
-    actualizarContadorCarrito();
-    renderizarPagina('carrito'); // Re-renderizar carrito
+/* --- CATÁLOGO --- */
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+  padding: 1rem 2rem;
 }
 
-function vaciarCarrito() {
-    carrito = [];
-    guardarCarrito();
-    actualizarContadorCarrito();
-    renderizarPagina('carrito');
+.tarjeta {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-function finalizarCompra() {
-    if (carrito.length === 0) {
-        alert('El carrito está vacío.');
-        return;
-    }
-    alert(`✅ ¡Compra finalizada!\nTotal: $${calcularTotal()}\nGracias por su compra.`);
-    vaciarCarrito();
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-// --- NAVEGACIÓN ---
-function navegar(ruta) {
-    window.location.hash = ruta;
-    renderizarPagina(ruta);
+.tarjeta img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
-function buscarJuegos() {
-    const input = document.getElementById('buscador');
-    const termino = input.value.toLowerCase().trim();
-    if (!termino) {
-        renderizarPagina('inicio');
-        return;
-    }
-
-    const resultados = productos.filter(p => 
-        p.nombre.toLowerCase().includes(termino)
-    );
-
-    const catalogo = document.getElementById('catalogo');
-    if (catalogo) {
-        catalogo.innerHTML = resultados.map(p => `
-            <div class="tarjeta">
-                <img src="${p.imagen}" alt="${p.nombre}">
-                <h3>${p.nombre}</h3>
-                <p class="precio">$${p.precio.toFixed(2)}</p>
-                <button onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
-                <button onclick="navegar('detalle/${p.id}')">Ver detalle</button>
-            </div>
-        `).join('');
-    }
+.tarjeta h3 {
+  color: #007bff;
+  margin-bottom: 0.5rem;
 }
 
-// --- INICIALIZACIÓN ---
-function init() {
-    // Manejar cambios en la URL (hash)
-    window.addEventListener('hashchange', () => {
-        const ruta = window.location.hash.replace('#', '') || 'inicio';
-        renderizarPagina(ruta);
-    });
-
-    // Cargar página inicial
-    const rutaInicial = window.location.hash.replace('#', '') || 'inicio';
-    renderizarPagina(rutaInicial);
-
-    // Actualizar contador al cargar
-    actualizarContadorCarrito();
+.tarjeta p.precio {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #28a745;
+  margin: 0.5rem 0;
 }
 
-// Iniciar app cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', init);
+.tarjeta button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+  transition: background 0.3s;
+}
+
+.tarjeta button:hover {
+  background-color: #218838;
+}
+
+/* --- DETALLE PRODUCTO --- */
+.detalle-producto {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.detalle-producto img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.detalle-producto h2 {
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+.detalle-producto .precio {
+  font-size: 1.5rem;
+  color: #28a745;
+  margin: 1rem 0;
+}
+
+.detalle-producto button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  transition: background 0.3s;
+}
+
+.detalle-producto button:hover {
+  background-color: #0056b3;
+}
+
+/* --- CARRITO --- */
+.lista-carrito {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.item-carrito {
+  background-color: #ffffff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.item-carrito h4 {
+  color: #007bff;
+}
+
+.total {
+  text-align: right;
+  padding: 1rem 2rem;
+}
+
+.total h3 {
+  font-size: 1.5rem;
+  color: #28a745;
+}
+
+.total button {
+  padding: 0.75rem 1.5rem;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.total button:nth-child(2) {
+  background-color: #dc3545;
+  color: white;
+}
+
+.total button:nth-child(2):hover {
+  background-color: #c82333;
+}
+
+.total button:nth-child(3) {
+  background-color: #28a745;
+  color: white;
+}
+
+.total button:nth-child(3):hover {
+  background-color: #218838;
+}
+
+/* --- FOOTER --- */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  color: #555;
+  margin-top: 2rem;
+  border-top: 1px solid #eaeaea;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .catalogo {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    padding: 0.5rem;
+  }
+
+  .buscador input {
+    width: 200px;
+  }
+
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav {
+    margin-top: 1rem;
+  }
+
+  nav a {
+    margin: 0 0.5rem;
+  }
+}
